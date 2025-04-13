@@ -57,6 +57,14 @@
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></span>
         </span>
+        <button
+          nz-button
+          nzType="primary"
+          nzShape="circle"
+          (click)="toggleTheme()"
+        >
+          <nz-icon nzType="moon" />
+        </button>
       </div>
     </nz-header>
     <nz-content>

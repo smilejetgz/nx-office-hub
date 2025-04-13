@@ -24,8 +24,20 @@
         ],
         "styles": [
           "apps/angular-workforce/src/styles.less",
-          "apps/angular-workforce/src/theme.less"
+          {
+            "input": "apps/angular-workforce/src/styles/default.less",
+            "bundleName": "default",
+            "inject": false
+          },
+          {
+            "input": "apps/angular-workforce/src/styles/dark.less",
+            "bundleName": "dark",
+            "inject": false
+          }
         ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["src/styles/themes"]
+        },
         "scripts": []
       },
       "configurations": {
