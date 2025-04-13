@@ -37,7 +37,7 @@
           }
         ],
         "stylePreprocessorOptions": {
-          "includePaths": ["src/styles/themes"]
+          "includePaths": ["apps/angular-workforce/src/styles/themes"]
         },
         "scripts": []
       },

@@ -55,7 +55,7 @@ export class ThemeService {
   }
 
   public loadThemeLocalStorage(): Promise<Event> {
-    const theme = localStorage.getItem('theme') as ThemeType;
+    const theme = localStorage.getItem('site-theme') as ThemeType;
     if (theme) {
       this.currentTheme = theme;
     } else {
@@ -66,7 +66,7 @@ export class ThemeService {
 
   public toggleTheme(): Promise<Event> {
     this.currentTheme = this.reverseTheme(this.currentTheme);
-    localStorage.setItem('theme', this.currentTheme);
+    localStorage.setItem('site-theme', this.currentTheme);
     return this.loadTheme(false);
   }
 }
