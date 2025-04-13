@@ -28,7 +28,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 })
 export class AppComponent implements OnInit {
   private iconService = inject(NzIconService);
-  isCollapsed = false;
+  isCollapsed = true;
   isThemeDark = false;
   isSmallScreen = false;
   windowWidth = window.innerWidth;

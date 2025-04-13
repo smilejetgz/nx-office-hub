@@ -19,7 +19,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-  @Input() isCollapsed = false;
+  @Input() isCollapsed = true;
   @Output() isCollapsedChange = new EventEmitter<boolean>();
 
   isThemeDark = false;
@@ -27,10 +27,17 @@ export class HeaderComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.themeService.loadThemeLocalStorage();
     this.isThemeDark = this.themeService.currentTheme === 'dark';
+
+    const storedIsCollapsed = localStorage.getItem('isCollapsed');
+    if (storedIsCollapsed !== null) {
+      this.isCollapsed = JSON.parse(storedIsCollapsed);
+      this.isCollapsedChange.emit(this.isCollapsed);
+    }
   }
 
   toggleCollapsed: () => void = () => {
     this.isCollapsed = !this.isCollapsed;
+    localStorage.setItem('isCollapsed', JSON.stringify(this.isCollapsed));
     this.isCollapsedChange.emit(this.isCollapsed);
     console.log(this.isCollapsed);
   };
