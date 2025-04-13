@@ -1,24 +1,20 @@
-import { Component, HostListener, inject, Input, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { ThemeService } from './theme.service';
-import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconService } from 'ng-zorro-antd/icon';
 import {
   DashboardOutline,
   FormOutline,
   MenuFoldOutline,
   MenuUnfoldOutline,
-  MoonOutline,
-  SunOutline,
 } from '@ant-design/icons-angular/icons';
 import { SiderComponent } from './shared/layouts/sider/sider.component';
 import { HeaderComponent } from './shared/layouts/header/header.component';
+import { IconDefinition } from '@ant-design/icons-angular';
 @Component({
   selector: 'app-root',
   imports: [
-    RouterLink,
     RouterOutlet,
 
     SiderComponent,
@@ -32,7 +28,6 @@ import { HeaderComponent } from './shared/layouts/header/header.component';
 })
 export class AppComponent implements OnInit {
   private iconService = inject(NzIconService);
-  private themeService = inject(ThemeService);
   isCollapsed = false;
   isThemeDark = false;
   isSmallScreen = false;
