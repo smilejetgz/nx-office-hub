@@ -17,6 +17,7 @@
         "tsConfig": "apps/angular-workforce/tsconfig.app.json",
         "inlineStyleLanguage": "less",
         "assets": [
+          "apps/angular-workforce/src/assets",
           {
             "glob": "**/*",
             "input": "apps/angular-workforce/public"

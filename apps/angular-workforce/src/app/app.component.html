@@ -9,8 +9,8 @@
   >
     <div class="sidebar-logo">
       <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-        <h1>Ant Design Of Angular</h1>
+        <img src="assets/images/systems/logo.png" alt="logo" />
+        <h1>Angular Office Hub</h1>
       </a>
     </div>
     <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
@@ -38,28 +38,35 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header">
-        <span
-          class="header-trigger"
-          tabindex="0"
-          (click)="isCollapsed = !isCollapsed"
-          (keydown.enter)="isCollapsed = !isCollapsed"
-          (keydown.space)="isCollapsed = !isCollapsed"
-        >
+      <div class="app-header" nz-row nzJustify="space-between">
+        <div nz-col>
           <span
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></span>
-        </span>
-        <button
-          nz-button
-          nzType="primary"
-          nzShape="circle"
-          (click)="toggleTheme()"
-        >
-          <nz-icon nzType="moon" />
-        </button>
+            class="header-trigger"
+            tabindex="0"
+            (click)="isCollapsed = !isCollapsed"
+            (keydown.enter)="isCollapsed = !isCollapsed"
+            (keydown.space)="isCollapsed = !isCollapsed"
+          >
+            <span
+              class="trigger"
+              nz-icon
+              [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></span>
+          </span>
+        </div>
+
+        <div nz-col>
+          <div class="theme-toggle">
+            <button
+              nz-button
+              nzType="primary"
+              nzShape="circle"
+              (click)="toggleTheme()"
+            >
+              <nz-icon [nzType]="isThemeDark ? 'sun' : 'moon'" />
+            </button>
+          </div>
+        </div>
       </div>
     </nz-header>
     <nz-content>
