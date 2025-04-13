@@ -1,4 +1,11 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { MoonOutline, SunOutline } from '@ant-design/icons-angular/icons';
 import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
@@ -11,11 +18,16 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   imports: [NzIconModule, NzGridModule, NzButtonModule],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   @Input() isCollapsed = false;
   @Output() isCollapsedChange = new EventEmitter<boolean>();
 
   isThemeDark = false;
+
+  async ngOnInit(): Promise<void> {
+    await this.themeService.loadThemeLocalStorage();
+    this.isThemeDark = this.themeService.currentTheme === 'dark';
+  }
 
   toggleCollapsed: () => void = () => {
     this.isCollapsed = !this.isCollapsed;

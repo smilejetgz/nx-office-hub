@@ -54,8 +54,19 @@ export class ThemeService {
     });
   }
 
+  public loadThemeLocalStorage(): Promise<Event> {
+    const theme = localStorage.getItem('theme') as ThemeType;
+    if (theme) {
+      this.currentTheme = theme;
+    } else {
+      this.currentTheme = ThemeType.default;
+    }
+    return this.loadTheme(true);
+  }
+
   public toggleTheme(): Promise<Event> {
     this.currentTheme = this.reverseTheme(this.currentTheme);
+    localStorage.setItem('theme', this.currentTheme);
     return this.loadTheme(false);
   }
 }
