@@ -22,7 +22,10 @@
             "input": "apps/angular-workforce/public"
           }
         ],
-        "styles": ["apps/angular-workforce/src/styles.less"],
+        "styles": [
+          "apps/angular-workforce/src/styles.less",
+          "apps/angular-workforce/src/theme.less"
+        ],
         "scripts": []
       },
       "configurations": {
