@@ -1,73 +1,21 @@
 <nz-layout class="app-layout">
   <nz-sider
-    class="menu-sidebar"
     nzCollapsible
     nzWidth="256px"
-    nzBreakpoint="md"
+    [nzBreakpoint]="isSmallScreen ? 'sm' : 'lg'"
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null"
+    [nzCollapsedWidth]="isSmallScreen ? 0 : 80"
+    class="menu-sidebar"
   >
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="assets/images/systems/logo.png" alt="logo" />
-        <h1>Angular Office Hub</h1>
-      </a>
-    </div>
-    <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <app-sider [isCollapsed]="isCollapsed"></app-sider>
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header" nz-row nzJustify="space-between">
-        <div nz-col>
-          <span
-            class="header-trigger"
-            tabindex="0"
-            (click)="isCollapsed = !isCollapsed"
-            (keydown.enter)="isCollapsed = !isCollapsed"
-            (keydown.space)="isCollapsed = !isCollapsed"
-          >
-            <span
-              class="trigger"
-              nz-icon
-              [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></span>
-          </span>
-        </div>
-
-        <div nz-col>
-          <div class="theme-toggle">
-            <button
-              nz-button
-              nzType="primary"
-              nzShape="circle"
-              (click)="toggleTheme()"
-            >
-              <nz-icon [nzType]="isThemeDark ? 'sun' : 'moon'" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <app-header
+        [isCollapsed]="isCollapsed"
+        (isCollapsedChange)="isCollapsed = $event"
+      ></app-header>
     </nz-header>
     <nz-content>
       <div class="inner-content">

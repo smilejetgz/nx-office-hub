@@ -1,0 +1,32 @@
+<div class="app-header" nz-row nzJustify="space-between">
+  <div nz-col>
+    <span
+      class="header-trigger"
+      tabindex="0"
+      (click)="toggleCollapsed()"
+      (keydown.enter)="toggleCollapsed()"
+      (keydown.space)="toggleCollapsed()"
+    >
+      <span
+        class="trigger"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+      ></span>
+    </span>
+  </div>
+  <div nz-col class="sm-header-logo">
+    <img src="assets/images/systems/logo.png" alt="logo" />
+  </div>
+  <div nz-col>
+    <div class="theme-toggle">
+      <button
+        nz-button
+        nzType="primary"
+        nzShape="circle"
+        (click)="toggleTheme()"
+      >
+        <nz-icon [nzType]="isThemeDark ? 'sun' : 'moon'" />
+      </button>
+    </div>
+  </div>
+</div>

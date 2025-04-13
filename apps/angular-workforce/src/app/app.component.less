@@ -11,14 +11,14 @@
       position: relative;
       z-index: 10;
       min-height: 100vh;
-      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.08);
 
       ::ng-deep .ant-menu-inline {
         border-right: none;
       }
     }
 
-    .sidebar-logo {
+    ::ng-deep .sidebar-logo {
       position: relative;
       height: 64px;
       padding-left: 24px;
@@ -27,14 +27,14 @@
       transition: all 0.3s;
     }
 
-    .sidebar-logo img {
+    ::ng-deep .sidebar-logo img {
       display: inline-block;
       height: 32px;
       width: 32px;
       vertical-align: middle;
     }
 
-    .sidebar-logo h1 {
+    ::ng-deep .sidebar-logo h1 {
       display: inline-block;
       margin: 0 0 0 20px;
       font-weight: 600;
@@ -44,18 +44,17 @@
     }
   }
 
-  nz-header {
+  ::ng-deep nz-header {
     padding: 0;
     width: 100%;
     z-index: 2;
 
-    .app-header {
+    ::ng-deep .app-header {
       position: relative;
       height: 64px;
-      padding: 0;
       box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
-      .header-trigger {
+      ::ng-deep .header-trigger {
         height: 64px;
         padding: 20px 24px;
         font-size: 20px;
@@ -63,8 +62,12 @@
         transition: all 0.3s, padding 0s;
       }
 
-      .theme-toggle {
+      ::ng-deep .theme-toggle {
         padding: 0 24px 0px 24px;
+      }
+
+      ::ng-deep .sm-header-logo {
+        display: none;
       }
     }
   }
@@ -75,6 +78,39 @@
     .inner-content {
       padding: 24px;
       height: 100%;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .app-layout {
+      padding: 0px;
+      nz-header {
+        ::ng-deep .app-header {
+          padding: 0px;
+          min-width: 100vw;
+
+          ::ng-deep .sm-header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            ::ng-deep img {
+              display: inline-block;
+              vertical-align: middle;
+              width: 40px;
+              height: auto;
+            }
+          }
+        }
+      }
+
+      nz-content {
+        margin: 8px;
+        .inner-content {
+          padding: 24px 8px 24px 8px;
+          min-width: 96vw;
+        }
+      }
     }
   }
 }

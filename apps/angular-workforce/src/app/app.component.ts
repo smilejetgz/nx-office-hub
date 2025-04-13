@@ -1,46 +1,60 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject, Input, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ThemeService } from './theme.service';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconService } from 'ng-zorro-antd/icon';
-import { MoonOutline, SunOutline } from '@ant-design/icons-angular/icons';
-import { NzGridModule } from 'ng-zorro-antd/grid';
+import {
+  DashboardOutline,
+  FormOutline,
+  MenuFoldOutline,
+  MenuUnfoldOutline,
+  MoonOutline,
+  SunOutline,
+} from '@ant-design/icons-angular/icons';
+import { SiderComponent } from './shared/layouts/sider/sider.component';
+import { HeaderComponent } from './shared/layouts/header/header.component';
 @Component({
   selector: 'app-root',
   imports: [
     RouterLink,
     RouterOutlet,
 
-    NzIconModule,
+    SiderComponent,
+    HeaderComponent,
+
     NzLayoutModule,
-    NzMenuModule,
     NzButtonModule,
-    NzGridModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private iconService = inject(NzIconService);
   private themeService = inject(ThemeService);
   isCollapsed = false;
   isThemeDark = false;
+  isSmallScreen = false;
+  windowWidth = window.innerWidth;
 
   constructor() {
-    this.iconService.addIcon(MoonOutline, SunOutline as IconDefinition);
+    this.iconService.addIcon(
+      MenuFoldOutline,
+      MenuUnfoldOutline,
+      DashboardOutline,
+      FormOutline as IconDefinition
+    );
   }
 
-  toggleCollapse(): void {
-    this.isCollapsed = !this.isCollapsed;
+  ngOnInit(): void {
+    this.onResize({ target: window });
   }
 
-  async toggleTheme(): Promise<void> {
-    await this.themeService.toggleTheme();
-    const themeElement = document.querySelector('html.dark') as HTMLElement;
-    this.isThemeDark = themeElement ? true : false;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event | { target: Window }): void {
+    const width = (event.target as Window).innerWidth;
+    this.windowWidth = width;
+    this.isSmallScreen = width < 576;
   }
 }

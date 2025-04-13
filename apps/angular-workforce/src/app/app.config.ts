@@ -10,8 +10,6 @@ import {
 } from '@angular/router';
 
 import { appRoutes } from './app.routes';
-import { icons } from './icons-provider';
-import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { en_US, NZ_I18N, provideNzI18n, th_TH } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -33,7 +31,6 @@ export const appConfig: ApplicationConfig = {
     AppInitializerProvider,
     { provide: NZ_I18N, useValue: th_TH },
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideNzIcons(icons),
     provideNzI18n(en_US),
     importProvidersFrom(FormsModule),
     provideAnimations(),
