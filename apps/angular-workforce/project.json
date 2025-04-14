@@ -18,6 +18,7 @@
         "inlineStyleLanguage": "less",
         "assets": [
           "apps/angular-workforce/src/assets",
+          "apps/angular-workforce/src/assets/fonts",
           {
             "glob": "**/*",
             "input": "apps/angular-workforce/public"

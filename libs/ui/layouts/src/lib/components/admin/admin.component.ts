@@ -17,8 +17,11 @@ import { NzIconService } from 'ng-zorro-antd/icon';
 import {
   DashboardOutline,
   FormOutline,
+  FrownFill,
   MenuFoldOutline,
   MenuUnfoldOutline,
+  SunFill,
+  SunOutline,
 } from '@ant-design/icons-angular/icons';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
