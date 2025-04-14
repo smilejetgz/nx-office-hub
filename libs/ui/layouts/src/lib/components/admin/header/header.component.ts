@@ -18,10 +18,14 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { LayoutService } from '../../../services/layouts.service';
+import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'lib-header',
   imports: [
+    CommonModule,
     NzIconModule,
     NzGridModule,
     NzButtonModule,
@@ -30,14 +34,14 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
   ],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit {
-  @Input() isCollapsed = true;
-  @Output() isCollapsedChange = new EventEmitter<boolean>();
-
+export class HeaderComponent {
   private themeService = inject(ThemeService);
   private iconService = inject(NzIconService);
+  private layoutService = inject(LayoutService);
 
+  isCollapsed = false;
   isThemeDark = false;
+  isSmallScreen = false;
 
   constructor() {
     this.iconService.addIcon(
@@ -45,25 +49,28 @@ export class HeaderComponent implements OnInit {
       SunOutline,
       UserOutline as IconDefinition
     );
-  }
 
-  ngOnInit(): void {
-    this.themeService.currentTheme$.subscribe((theme) => {
-      this.isThemeDark = theme === 'dark';
-    });
+    this.themeService.currentTheme$
+      .pipe(takeUntilDestroyed())
+      .subscribe((theme) => {
+        this.isThemeDark = theme === 'dark';
+      });
 
-    const storedIsCollapsed = localStorage.getItem('isCollapsed');
-    if (storedIsCollapsed !== null) {
-      this.isCollapsed = JSON.parse(storedIsCollapsed);
-      this.isCollapsedChange.emit(this.isCollapsed);
-    }
+    this.layoutService.isCollapsed$
+      .pipe(takeUntilDestroyed())
+      .subscribe((collapsed) => {
+        this.isCollapsed = collapsed;
+      });
+
+    this.layoutService.isSmallScreen$
+      .pipe(takeUntilDestroyed())
+      .subscribe((smallScreen) => {
+        this.isSmallScreen = smallScreen;
+      });
   }
 
   toggleCollapsed(): void {
-    this.isCollapsed = !this.isCollapsed;
-    localStorage.setItem('isCollapsed', JSON.stringify(this.isCollapsed));
-    this.isCollapsedChange.emit(this.isCollapsed);
-    console.log(this.isCollapsed);
+    this.layoutService.toggleCollapsed();
   }
 
   toggleTheme(): void {

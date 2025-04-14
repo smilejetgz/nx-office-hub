@@ -3,6 +3,7 @@ import {
   provideZoneChangeDetection,
   importProvidersFrom,
   provideAppInitializer,
+  inject,
 } from '@angular/core';
 import {
   provideRouter,
@@ -19,6 +20,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 import { AppInitializerProvider } from './app-initializer.service';
+import { ThemeService } from '@nx-office-hub/themes';
+import { LayoutService } from '@nx-office-hub/layouts';
 
 registerLocaleData(en);
 
@@ -29,7 +32,18 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withRouterConfig({ onSameUrlNavigation: 'reload' })
     ),
-    AppInitializerProvider,
+    provideAppInitializer(async () => {
+      const themeService = inject(ThemeService);
+      const layoutService = inject(LayoutService);
+
+      try {
+        await Promise.resolve();
+        layoutService.loadCollapsedFromLocalStorage();
+        themeService.loadThemeFromLocalStorage();
+      } catch (error) {
+        console.error('APP_INITIALIZER error:', error);
+      }
+    }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideNzI18n(en_US),
     importProvidersFrom(FormsModule),

@@ -6,5 +6,10 @@
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  // Disable copilot
+  "github.copilot.enable": {
+    "enabled": false
+  },
+  "editor.inlineSuggest.enabled": false
 }

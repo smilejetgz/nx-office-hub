@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
 import {
   debounceTime,
   map,
@@ -28,11 +28,15 @@ import {
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { IconDefinition } from '@ant-design/icons-angular';
+import { LayoutService } from '../../services/layouts.service';
+import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'lib-admin',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
     SidebarComponent,
     HeaderComponent,
@@ -46,10 +50,10 @@ export class AdminComponent implements OnInit, OnDestroy {
   private iconService = inject(NzIconService);
   private cdr = inject(ChangeDetectorRef);
   private ngZone = inject(NgZone);
+  private layoutService = inject(LayoutService);
 
-  isCollapsed = true;
-  isThemeDark = false;
   isSmallScreen = false;
+  isCollapsed = false;
   windowWidth = window.innerWidth;
 
   private resizeSubscription?: Subscription;
@@ -61,6 +65,18 @@ export class AdminComponent implements OnInit, OnDestroy {
       DashboardOutline,
       FormOutline as IconDefinition
     );
+
+    this.layoutService.isSmallScreen$
+      .pipe(takeUntilDestroyed())
+      .subscribe((smallScreen) => {
+        this.isSmallScreen = smallScreen;
+      });
+
+    this.layoutService.isCollapsed$
+      .pipe(takeUntilDestroyed())
+      .subscribe((collapsed) => {
+        this.isCollapsed = collapsed;
+      });
   }
 
   ngOnInit(): void {
@@ -83,7 +99,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   handleResize(width: number): void {
     // console.log('🔥 handleResize called with:', width);
     this.windowWidth = width;
-    this.isSmallScreen = width < 576;
+    const small = width < 576;
+    this.layoutService.setSmallScreen(small);
   }
 
   ngOnDestroy(): void {
