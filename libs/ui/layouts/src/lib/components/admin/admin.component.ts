@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   inject,
@@ -6,14 +7,8 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
-import {
-  debounceTime,
-  map,
-  distinctUntilChanged,
-  throttleTime,
-  auditTime,
-} from 'rxjs/operators';
+import { fromEvent, of, Subscription, timer } from 'rxjs';
+import { map, distinctUntilChanged, auditTime, scan, delayWhen } from 'rxjs/operators';
 
 import { RouterOutlet } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -46,7 +41,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.less',
 })
-export class AdminComponent implements OnInit, OnDestroy {
+export class AdminComponent implements OnInit, OnDestroy, AfterViewInit {
   private iconService = inject(NzIconService);
   private cdr = inject(ChangeDetectorRef);
   private ngZone = inject(NgZone);
@@ -57,6 +52,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   windowWidth = window.innerWidth;
 
   private resizeSubscription?: Subscription;
+  private collapsedSubscription?: Subscription;
 
   constructor() {
     this.iconService.addIcon(
@@ -66,17 +62,11 @@ export class AdminComponent implements OnInit, OnDestroy {
       FormOutline as IconDefinition
     );
 
-    this.layoutService.isSmallScreen$
-      .pipe(takeUntilDestroyed())
-      .subscribe((smallScreen) => {
-        this.isSmallScreen = smallScreen;
-      });
+    this.layoutService.isSmallScreen$.pipe(takeUntilDestroyed()).subscribe((smallScreen) => {
+      this.isSmallScreen = smallScreen;
+    });
 
-    this.layoutService.isCollapsed$
-      .pipe(takeUntilDestroyed())
-      .subscribe((collapsed) => {
-        this.isCollapsed = collapsed;
-      });
+    this.layoutService.loadCollapsedFromLocalStorage();
   }
 
   ngOnInit(): void {
@@ -96,14 +86,29 @@ export class AdminComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngAfterViewInit(): void {
+    this.collapsedSubscription = this.layoutService.isCollapsed$
+      .pipe(
+        scan((acc, value) => ({ count: acc.count + 1, value }), {
+          count: 0,
+          value: false,
+        }),
+        delayWhen((state) => (state.count === 1 ? timer(1000) : of(null)))
+      )
+      .subscribe((state) => {
+        this.isCollapsed = state.value;
+        this.cdr.detectChanges();
+      });
+  }
+
   handleResize(width: number): void {
-    // console.log('🔥 handleResize called with:', width);
     this.windowWidth = width;
     const small = width < 576;
     this.layoutService.setSmallScreen(small);
   }
 
   ngOnDestroy(): void {
+    this.collapsedSubscription?.unsubscribe();
     this.resizeSubscription?.unsubscribe();
   }
 }

@@ -2,12 +2,12 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.associations": {
-    "*.html": "html"
+    "*.html": "html",
+    "*.scss": "tailwindcss"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  // Disable copilot
   "github.copilot.enable": {
     "enabled": false
   },

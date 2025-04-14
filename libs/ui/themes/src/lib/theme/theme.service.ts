@@ -10,9 +10,7 @@ enum ThemeType {
   providedIn: 'root',
 })
 export class ThemeService {
-  private currentThemeSubject = new BehaviorSubject<ThemeType>(
-    ThemeType.default
-  );
+  private currentThemeSubject = new BehaviorSubject<ThemeType>(ThemeType.default);
   currentTheme$ = this.currentThemeSubject.asObservable();
 
   constructor() {
@@ -44,8 +42,7 @@ export class ThemeService {
   }
 
   public loadThemeFromLocalStorage(): void {
-    const theme =
-      (localStorage.getItem('site-theme') as ThemeType) || ThemeType.default;
+    const theme = (localStorage.getItem('site-theme') as ThemeType) || ThemeType.default;
     this.currentThemeSubject.next(theme);
     this.applyTheme(theme, true);
   }

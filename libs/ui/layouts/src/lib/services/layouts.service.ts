@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,6 @@ export class LayoutService {
 
   public loadCollapsedFromLocalStorage(): void {
     const storedValue = localStorage.getItem('isCollapsed');
-    console.log('storedValue', storedValue);
     const currentState = storedValue ? JSON.parse(storedValue) : false;
     this.setCollapsed(currentState);
   }

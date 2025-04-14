@@ -8,11 +8,11 @@
     [nzCollapsedWidth]="isSmallScreen ? 0 : 80"
     class="menu-sidebar"
   >
-    <lib-sidebar></lib-sidebar>
+    <lib-sidebar [isCollapsed]="isCollapsed"></lib-sidebar>
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <lib-header></lib-header>
+      <lib-header [isCollapsed]="isCollapsed"></lib-header>
     </nz-header>
     <nz-content>
       <div class="inner-content">
