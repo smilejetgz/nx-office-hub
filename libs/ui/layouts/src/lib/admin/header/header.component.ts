@@ -9,12 +9,12 @@ import {
 import { IconDefinition } from '@ant-design/icons-angular';
 import { MoonOutline, SunOutline } from '@ant-design/icons-angular/icons';
 import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
-import { ThemeService } from '@nx-office-hub/theme';
+import { ThemeService } from '@nx-office-hub/themes';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
-  selector: 'app-header',
+  selector: 'lib-header',
   imports: [NzIconModule, NzGridModule, NzButtonModule],
   templateUrl: './header.component.html',
 })
