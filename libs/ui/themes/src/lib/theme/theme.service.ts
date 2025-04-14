@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 enum ThemeType {
   dark = 'dark',
@@ -9,9 +10,16 @@ enum ThemeType {
   providedIn: 'root',
 })
 export class ThemeService {
-  currentTheme = ThemeType.default;
+  private currentThemeSubject = new BehaviorSubject<ThemeType>(
+    ThemeType.default
+  );
+  currentTheme$ = this.currentThemeSubject.asObservable();
 
-  private reverseTheme(theme: string): ThemeType {
+  constructor() {
+    this.loadThemeFromLocalStorage();
+  }
+
+  private reverseTheme(theme: ThemeType): ThemeType {
     return theme === ThemeType.dark ? ThemeType.default : ThemeType.dark;
   }
 
@@ -35,38 +43,29 @@ export class ThemeService {
     });
   }
 
-  public loadTheme(firstLoad = true): Promise<Event> {
-    const theme = this.currentTheme;
+  public loadThemeFromLocalStorage(): void {
+    const theme =
+      (localStorage.getItem('site-theme') as ThemeType) || ThemeType.default;
+    this.currentThemeSubject.next(theme);
+    this.applyTheme(theme, true);
+  }
+
+  private applyTheme(theme: ThemeType, firstLoad: boolean): void {
     if (firstLoad) {
       document.documentElement.classList.add(theme);
     }
-    return new Promise<Event>((resolve, reject) => {
-      this.loadCss(`${theme}.css`, theme).then(
-        (e) => {
-          if (!firstLoad) {
-            document.documentElement.classList.add(theme);
-          }
-          this.removeUnusedTheme(this.reverseTheme(theme));
-          resolve(e);
-        },
-        (e) => reject(e)
-      );
+    this.loadCss(`${theme}.css`, theme).then(() => {
+      if (!firstLoad) {
+        document.documentElement.classList.add(theme);
+      }
+      this.removeUnusedTheme(this.reverseTheme(theme));
     });
   }
 
-  public loadThemeLocalStorage(): Promise<Event> {
-    const theme = localStorage.getItem('site-theme') as ThemeType;
-    if (theme) {
-      this.currentTheme = theme;
-    } else {
-      this.currentTheme = ThemeType.default;
-    }
-    return this.loadTheme(true);
-  }
-
-  public toggleTheme(): Promise<Event> {
-    this.currentTheme = this.reverseTheme(this.currentTheme);
-    localStorage.setItem('site-theme', this.currentTheme);
-    return this.loadTheme(false);
+  public toggleTheme(): void {
+    const newTheme = this.reverseTheme(this.currentThemeSubject.value);
+    this.currentThemeSubject.next(newTheme);
+    localStorage.setItem('site-theme', newTheme);
+    this.applyTheme(newTheme, false);
   }
 }

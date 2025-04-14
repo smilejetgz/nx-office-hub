@@ -17,17 +17,31 @@
   <div nz-col class="sm-header-logo">
     <img src="assets/images/systems/logo.png" alt="logo" />
   </div>
-  <div nz-col>
-    <div class="theme-toggle">
-      <button
-        nz-button
-        nzType="primary"
-        nzDanger
-        nzShape="circle"
-        (click)="toggleTheme()"
-      >
-        <nz-icon [nzType]="isThemeDark ? 'sun' : 'moon'" />
-      </button>
+  <div nz-col class="header-right">
+    <div nz-row>
+      <div nz-col>
+        <button
+          nz-button
+          nzType="primary"
+          nzDanger
+          nzShape="circle"
+          (click)="toggleTheme()"
+        >
+          <nz-icon [nzType]="isThemeDark ? 'sun' : 'moon'" />
+        </button>
+      </div>
+      <div nz-col>
+        <a nz-dropdown [nzDropdownMenu]="menu">
+          <nz-avatar nzIcon="user"></nz-avatar>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>Profile</li>
+            <li nz-menu-item>Setting</li>
+            <li nz-menu-item>Logout</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
     </div>
   </div>
 </div>
