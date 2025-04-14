@@ -1,6 +1,5 @@
 import { Injectable, inject, Provider, EnvironmentProviders } from '@angular/core';
-import { ThemeService } from '@nx-office-hub/themes';
-import { LayoutService } from '@nx-office-hub/layouts';
+import { LayoutService, ThemeService } from '@nx-office-hub/layouts';
 import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 
 @Injectable({

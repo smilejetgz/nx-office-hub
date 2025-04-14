@@ -2,7 +2,7 @@ import { Component, inject, Input } from '@angular/core';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { MoonOutline, SunOutline, UserOutline } from '@ant-design/icons-angular/icons';
 import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
-import { ThemeService } from '@nx-office-hub/themes';
+import { ThemeService } from '@nx-office-hub/layouts';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
