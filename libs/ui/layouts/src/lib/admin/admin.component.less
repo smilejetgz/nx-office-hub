@@ -46,6 +46,10 @@
     }
   }
 
+  ::ng-deep div[nz-dropdown-menu] ul.nz-menu .toggle-theme-menu-item {
+    display: none !important;
+  }
+
   ::ng-deep nz-header {
     padding: 0;
     width: 100%;
@@ -67,7 +71,7 @@
       ::ng-deep .header-right {
         padding: 0 24px 0px 24px;
 
-        ::ng-deep div {
+        div {
           gap: 12px;
         }
       }
@@ -88,6 +92,10 @@
   }
 
   @media (max-width: 576px) {
+    ::ng-deep div[nz-dropdown-menu] ul.nz-menu .toggle-theme-menu-item {
+      display: block !important;
+    }
+
     .app-layout {
       padding: 0px;
       nz-header {

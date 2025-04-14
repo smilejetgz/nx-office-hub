@@ -37,6 +37,13 @@
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
             <li nz-menu-item>Profile</li>
+            <li
+              nz-menu-item
+              class="toggle-theme-menu-item"
+              (click)="toggleTheme()"
+            >
+              {{ isThemeDark ? 'Dark' : 'Light' }}
+            </li>
             <li nz-menu-item>Setting</li>
             <li nz-menu-item>Logout</li>
           </ul>
