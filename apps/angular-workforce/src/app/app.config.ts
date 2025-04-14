@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
-import { AppInitializerProvider } from './app-initializer.service';
+import { AppInitializerProvider } from '@nx-office-hub/layouts';
 
 registerLocaleData(en);
 
