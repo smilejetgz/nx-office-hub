@@ -3,10 +3,17 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.associations": {
     "*.html": "html",
-    "*.scss": "tailwindcss"
+    "*.less": "less"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.wordWrap": "off",
+    "editor.suggest.insertMode": "replace"
   },
   "github.copilot.enable": {
     "enabled": false
