@@ -13,7 +13,15 @@
       position: relative;
       z-index: 10;
       min-height: 100vh;
-      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.08);
+
+      :host-context(html.default) & {
+        border-right: 1px solid rgba(40, 40, 40, 0.1);
+        box-shadow: 2px 0 6px rgba(40, 40, 40, 0.15);
+      }
+
+      :host-context(html.dark) & {
+        border-right: 1px solid #303030;
+      }
 
       ::ng-deep .ant-menu-inline {
         border-right: none;
@@ -59,7 +67,15 @@
     ::ng-deep .app-header {
       position: relative;
       height: 64px;
-      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+      :host-context(html.default) & {
+        border-bottom: 1px solid rgba(40, 40, 40, 0.1);
+        box-shadow: 0 2px 6px rgba(40, 40, 40, 0.15);
+      }
+
+      :host-context(html.dark) & {
+        border-bottom: 1px solid #303030;
+      }
 
       ::ng-deep .header-trigger {
         height: 64px;
@@ -120,8 +136,8 @@
       nz-content {
         margin: 8px;
         .inner-content {
-          padding: 24px 8px 24px 8px;
-          min-width: 96vw;
+          padding: 24px 0px 24px 0px;
+          min-width: 90vw;
         }
       }
     }
@@ -131,9 +147,12 @@
     display: none;
     width: 100%;
     height: 100vh;
-    background: #f0f2f57a;
     padding: 0px;
     margin: 0px;
+
+    :host-context(html.dark) & {
+      color: #fff;
+    }
   }
 
   @media (max-width: 300px) {
@@ -145,7 +164,6 @@
       display: flex;
       text-align: center;
       font-size: 16px;
-      color: #000000d9;
       align-items: center;
       justify-content: center;
 

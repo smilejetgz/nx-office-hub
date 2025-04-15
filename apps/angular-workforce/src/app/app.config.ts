@@ -9,6 +9,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 import { AppInitializerProvider } from '@nx-office-hub/layouts';
+import { provideEchartsCore } from 'ngx-echarts';
 
 registerLocaleData(en);
 
@@ -19,6 +20,9 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withRouterConfig({ onSameUrlNavigation: 'reload' })
     ),
+    provideEchartsCore({
+      echarts: () => import('echarts'),
+    }),
     ...AppInitializerProvider,
     importProvidersFrom(FormsModule),
     provideZoneChangeDetection({ eventCoalescing: true }),
