@@ -1,12 +1,15 @@
-import { Component, inject, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { MenuItems } from '../admin.model';
 
 @Component({
   selector: 'lib-sidebar',
-  imports: [NzMenuModule, RouterLink],
+  imports: [CommonModule, NzMenuModule, RouterLink],
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {
   @Input() isCollapsed = false;
+  @Input() menuItems!: MenuItems[];
 }

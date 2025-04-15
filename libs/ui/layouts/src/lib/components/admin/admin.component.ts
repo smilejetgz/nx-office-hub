@@ -8,27 +8,20 @@ import {
   OnInit,
 } from '@angular/core';
 import { fromEvent, of, Subscription, timer } from 'rxjs';
-import { map, distinctUntilChanged, auditTime, scan, delayWhen } from 'rxjs/operators';
+import { auditTime, delayWhen, distinctUntilChanged, map, scan } from 'rxjs/operators';
 
-import { RouterOutlet } from '@angular/router';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconService } from 'ng-zorro-antd/icon';
-import {
-  DashboardOutline,
-  FormOutline,
-  FrownFill,
-  MenuFoldOutline,
-  MenuUnfoldOutline,
-  SunFill,
-  SunOutline,
-} from '@ant-design/icons-angular/icons';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { HeaderComponent } from './header/header.component';
-import { IconDefinition } from '@ant-design/icons-angular';
-import { LayoutService } from '../../services/layouts.service';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconService } from 'ng-zorro-antd/icon';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { LayoutService } from '../../services/layouts.service';
+import { MenuItems } from './admin.model';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'lib-admin',
@@ -45,31 +38,41 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './admin.component.less',
 })
 export class AdminComponent implements OnInit, OnDestroy, AfterViewInit {
-  private iconService = inject(NzIconService);
   private cdr = inject(ChangeDetectorRef);
   private ngZone = inject(NgZone);
-  private layoutService = inject(LayoutService);
+
+  iconDefault: IconDefinition[] = [MenuFoldOutline, MenuUnfoldOutline];
 
   isSmallScreen = false;
   isCollapsed = false;
   windowWidth = window.innerWidth;
 
+  menuItems!: MenuItems[];
+
   private resizeSubscription?: Subscription;
   private collapsedSubscription?: Subscription;
 
-  constructor() {
-    this.iconService.addIcon(
-      MenuFoldOutline,
-      MenuUnfoldOutline,
-      DashboardOutline,
-      FormOutline as IconDefinition
-    );
+  constructor(
+    private route: ActivatedRoute,
+    private layoutService: LayoutService,
+    private iconService: NzIconService
+  ) {
+    this.route.data.subscribe((data) => {
+      this.menuItems = data['menuItems'];
+      const menuIcons: IconDefinition[] = this.menuItems.map((item) => item.icon).filter(Boolean);
+
+      this.registerMenuIcons([...this.iconDefault, ...menuIcons]);
+    });
 
     this.layoutService.isSmallScreen$.pipe(takeUntilDestroyed()).subscribe((smallScreen) => {
       this.isSmallScreen = smallScreen;
     });
 
     this.layoutService.loadCollapsedFromLocalStorage();
+  }
+
+  private registerMenuIcons(icon: IconDefinition[]): void {
+    this.iconService.addIcon(...icon);
   }
 
   ngOnInit(): void {

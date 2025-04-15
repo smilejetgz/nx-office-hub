@@ -5,6 +5,19 @@
   </a>
 </div>
 <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+  @for (menuItem of menuItems; track $index) {
+    <li nz-submenu nzOpen [nzTitle]="menuItem.name | titlecase" [nzIcon]="menuItem.icon.name">
+      <ul>
+        @for (childrenItem of menuItem.childrens; track $index) {
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="childrenItem.url">{{ childrenItem.name | titlecase }}</a>
+          </li>
+        }
+      </ul>
+    </li>
+  }
+</ul>
+<!-- <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
   <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
     <ul>
       <li nz-menu-item nzMatchRouter>
@@ -25,4 +38,4 @@
       </li>
     </ul>
   </li>
-</ul>
+</ul> -->

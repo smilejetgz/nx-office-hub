@@ -15,6 +15,15 @@
     "editor.wordWrap": "off",
     "editor.suggest.insertMode": "replace"
   },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.suggest.showKeywords": true
+  },
   "github.copilot.enable": {
     "enabled": false
   },
