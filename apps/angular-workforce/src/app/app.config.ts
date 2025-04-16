@@ -1,15 +1,15 @@
-import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withRouterConfig } from '@angular/router';
 
-import { appRoutes } from './app.routes';
 import { registerLocaleData } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
-import { AppInitializerProvider } from '@nx-office-hub/layouts';
+import { AppInitializerProvider } from '@nx-office-hub/ui';
 import { provideEchartsCore } from 'ngx-echarts';
+import { appRoutes } from './app.routes';
 
 registerLocaleData(en);
 

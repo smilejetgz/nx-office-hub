@@ -1,12 +1,12 @@
 import { IconDefinition } from '@ant-design/icons-angular';
 
-export type MenuItems = {
+export interface MenuItems {
   name: string;
   icon: IconDefinition;
   childrens?: ChildrenItems[];
-};
+}
 
-type ChildrenItems = {
+export interface ChildrenItems {
   name: string;
   url: string;
-};
+}

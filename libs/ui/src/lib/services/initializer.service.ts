@@ -1,6 +1,7 @@
-import { Injectable, inject, Provider, EnvironmentProviders } from '@angular/core';
-import { LayoutService, ThemeService } from '@nx-office-hub/layouts';
+import { EnvironmentProviders, inject, Injectable, Provider } from '@angular/core';
 import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
+import { LayoutService } from './layouts.service';
+import { ThemeService } from './theme.service';
 
 @Injectable({
   providedIn: 'root',

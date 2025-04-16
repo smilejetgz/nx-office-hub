@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { MenuItems } from '../admin.model';
+import { MenuItems } from '../../../../models/layout-admin';
 
 @Component({
   selector: 'lib-sidebar',

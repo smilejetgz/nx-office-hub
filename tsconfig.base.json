@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@angular-workforce/*": ["apps/angular-workforce/src/app/*"],
-      "@nx-office-hub/layouts": ["libs/ui/layouts/src/index.ts"]
+      "@nx-office-hub/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

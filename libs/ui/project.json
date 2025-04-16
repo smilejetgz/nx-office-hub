@@ -1,7 +1,7 @@
 {
-  "name": "layouts",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/layouts/src",
+  "name": "ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [],

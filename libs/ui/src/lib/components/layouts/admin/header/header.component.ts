@@ -1,15 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { MoonOutline, SunOutline, UserOutline } from '@ant-design/icons-angular/icons';
-import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
-import { ThemeService } from '@nx-office-hub/layouts';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { LayoutService } from '../../../services/layouts.service';
-import { CommonModule } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
+import { LayoutService, ThemeService } from '../../../../services';
 
 @Component({
   selector: 'lib-header',

@@ -18,8 +18,8 @@ import { MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/ic
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconService } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { LayoutService } from '../../services/layouts.service';
-import { MenuItems } from './admin.model';
+import { MenuItems } from '../../../models';
+import { LayoutService } from '../../../services';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 

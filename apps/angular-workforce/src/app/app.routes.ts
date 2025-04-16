@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AdminComponent } from '@nx-office-hub/layouts';
+import { AdminComponent } from '@nx-office-hub/ui';
 import menuItems from './features/shared/menu';
 
 export const appRoutes: Routes = [

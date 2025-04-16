@@ -1,7 +1,7 @@
 import { DashboardOutline, FormOutline } from '@ant-design/icons-angular/icons';
-import { AdminModel } from '@nx-office-hub/layouts';
+import { MenuItems } from '@nx-office-hub/ui';
 
-const menuItems: AdminModel.MenuItems[] = [
+const menuItems: MenuItems[] = [
   {
     name: 'dashborad',
     icon: DashboardOutline,
